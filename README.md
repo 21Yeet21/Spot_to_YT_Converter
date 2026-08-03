@@ -1,9 +1,9 @@
 # Spotify to YouTube Music Converter
 
-A free, local, self-hosted Python script to convert Spotify tracks into a YouTube Music playlist. 
-No Spotify Premium required. No Google Cloud Developer account required. No 500-song limits.
+A free, local, self-hosted Python script to convert Spotify tracks into a YouTube Music playlist. No Spotify Premium required. No Google Cloud Developer account required. No 500-song limits.
 
 ## How It Works
+
 1. The script reads Spotify track URLs from `urls.txt`.
 2. It uses Spotify's public oEmbed API to get the exact song name and artist.
 3. It authenticates with YouTube Music using a secure, local browser session.
@@ -11,13 +11,16 @@ No Spotify Premium required. No Google Cloud Developer account required. No 500-
 5. It creates a private YouTube Music playlist and adds all the songs.
 6. It prints a direct link to your new playlist.
 
-### 1. Searching, Converting and Link (converter.py)
-https://github.com/21Yeet21/Spot_to_YT_Converter/blob/main/images/Conversion.png
+## Screenshots
 
-### 2 Final result 
-https://github.com/21Yeet21/Spot_to_YT_Converter/blob/main/images/Result.png
+**1. Searching, Converting and Link (`converter.py`)**
+![Searching and Converting](images/Conversion.png)
+
+**2. Final Result**
+![Final Result](images/Result.png)
 
 ## Prerequisites
+
 1. Python 3.8+ installed on your computer.
 2. Google Chrome installed on your computer (required for the automated login script).
 
