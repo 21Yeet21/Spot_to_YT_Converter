@@ -89,15 +89,37 @@ class YTDirect:
         }
         data = self._post("playlist/create", body)
         return data.get('playlistId')
-
+        
     def add_items(self, playlist_id, video_ids):
-        actions = [{"action": "ACTION_ADD_VIDEO", "addedVideoId": vid} for vid in video_ids]
-        body = {
-            "playlistId": playlist_id,
-            "actions": actions
-        }
-        return self._post("browse/edit_playlist", body)
-
+        # YouTube Music limits batch additions and silently fails if missing dedupeOption.
+        # We chunk them into batches of 20 to be safe.
+        chunk_size = 20
+        for i in range(0, len(video_ids), chunk_size):
+            chunk = video_ids[i:i + chunk_size]
+            actions = []
+            for vid in chunk:
+                actions.append({
+                    "action": "ACTION_ADD_VIDEO",
+                    "addedVideoId": vid,
+                    "dedupeOption": "DEDUPE_OPTION_SKIP" # REQUIRED by YouTube
+                })
+            
+            body = {
+                "playlistId": playlist_id,
+                "actions": actions
+            }
+            
+            data = self._post("browse/edit_playlist", body)
+            
+            # Verify YouTube actually accepted the songs
+            status = data.get("status", "")
+            if status != "STATUS_SUCCEEDED":
+                raise Exception(f"YouTube rejected the songs. Response: {data}")
+                
+            time.sleep(1) # Be polite between chunks
+            
+        return True
+        
 def spotify_url_to_query(url):
     m = re.search(r"track/([a-zA-Z0-9]+)", url)
     if not m: return ""
