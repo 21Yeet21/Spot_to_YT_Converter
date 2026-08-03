@@ -14,9 +14,11 @@ A free, local, self-hosted Python script to convert Spotify tracks into a YouTub
 ## Screenshots
 
 **1. Searching, Converting and Link (`converter.py`)**
+
 ![Searching and Converting](images/Conversion.png)
 
 **2. Final Result**
+
 ![Final Result](images/Result.png)
 
 ## Prerequisites
