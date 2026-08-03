@@ -1,0 +1,11 @@
+# Sensitive login files
+browser.json
+chrome_profile/
+ff_profile/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Debug files
+search_dump.json
