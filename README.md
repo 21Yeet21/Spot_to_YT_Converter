@@ -1,15 +1,20 @@
+Here is the updated `README.md` that includes the new **Batch Mode** feature, the improved Spotify scraping logic (which bypasses their bot protection), and the strict artist-matching feature. 
+
+Replace your entire `README.md` with this text:
+
+```markdown
 # Spotify to YouTube Music Converter
 
 A free, local, self-hosted Python script to convert Spotify tracks into a YouTube Music playlist. No Spotify Premium required. No Google Cloud Developer account required. No 500-song limits.
 
 ## How It Works
 
-1. The script reads Spotify track URLs from `urls.txt`.
-2. It uses Spotify's public oEmbed API to get the exact song name and artist.
+1. The script reads Spotify track URLs from `urls.txt` (Single Mode) or `batch.txt` (Batch Mode).
+2. It securely scrapes Spotify's embed pages to extract the exact Song Title and Artist Name, bypassing their bot protection.
 3. It authenticates with YouTube Music using a secure, local browser session.
-4. It searches YouTube Music for the exact match.
-5. It creates a private YouTube Music playlist and adds all the songs.
-6. It prints a direct link to your new playlist.
+4. It searches YouTube Music for the exact match and **strictly verifies the artist** to prevent imposter songs/covers from being added.
+5. It creates a private YouTube Music playlist and adds all the songs in batches.
+6. It prints a direct link to your new playlist(s).
 
 ## Screenshots
 
@@ -42,18 +47,28 @@ A free, local, self-hosted Python script to convert Spotify tracks into a YouTub
 
 ## How to Use
 
-1. **Add your Spotify songs:**
-   - Open `urls.txt` in a text editor.
-   - Paste your Spotify track URLs (one per line). 
-   - *Example:* `https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT`
+### Option A: Single Playlist Mode
+1. Create a file named `urls.txt` in the same folder.
+2. Paste your Spotify track URLs inside (one per line). 
+   *Example:* `https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT`
+3. Run `python converter.py`.
+4. Type a name for your new playlist when prompted (or press Enter for the default "Spotify Import").
 
-2. **Run the converter:**
-   - Run `python converter.py`
-   - Type a name for your new playlist when prompted (or press Enter for the default "Spotify Import").
-   - The script will search for each song on YouTube Music and add them to a new private playlist.
+### Option B: Batch Mode (Multiple Playlists at once)
+1. Create a file named `batch.txt` in the same folder.
+2. Format it by putting the Playlist Name on one line, followed by the URLs on the next lines. Separate playlists with an empty line:
+   ```text
+   My Ambient Playlist
+   https://open.spotify.com/track/abc123
+   https://open.spotify.com/track/def456
 
-3. **Listen:**
-   - When the script finishes, it will print a direct link to your new YouTube Music playlist.
+   Workout Mix
+   https://open.spotify.com/track/ghi789
+   https://open.spotify.com/track/jkl012
+   ```
+3. Run `python converter.py`. The script will automatically detect `batch.txt`, process the first playlist, wait 5 seconds, process the next, and output all links at the end.
+
+*(Note: If `batch.txt` exists, the script will ignore `urls.txt` and run in Batch Mode. To use Single Mode again, simply delete or rename `batch.txt`)*.
 
 ## Troubleshooting
 
@@ -67,8 +82,11 @@ A free, local, self-hosted Python script to convert Spotify tracks into a YouTub
 - **Error: `invalid session id`**
   - The Chrome window was closed before the script could extract cookies. Do not close the Chrome window manually; just log in and press ENTER in the terminal.
 
-- **Some songs say `No YT match`**
-  - YouTube Music might not have the song, or the Spotify title formatting was too unusual. You can manually search for these few songs and add them to the generated playlist.
+- **Songs are being `Skipped (artist mismatch on YouTube)`**
+  - The script strictly verifies that the artist on YouTube matches the artist on Spotify. If YouTube only has a cover or remix by a different artist, it will skip it to protect your playlist.
+
+- **Spotify Rate Limits (`Waiting 10 seconds...`)**
+  - If you are converting massive playlists, Spotify might temporarily block your IP. The script will automatically pause and retry.
 
 ## Disclaimer
 This project is for educational purposes only. It automates browser actions to interact with YouTube Music's internal API. Use it responsibly and respect the terms of service of both Spotify and YouTube.
