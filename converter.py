@@ -23,6 +23,7 @@ class YTDirect:
         self._setup_auth()
 
     def _setup_auth(self):
+        """Extracts SAPISID cookie and generates the SAPISIDHASH auth header."""
         cookie_str = self.headers.get("cookie", "")
         cookies = {c.split("=")[0]: c.split("=", 1)[1] for c in cookie_str.split("; ")}
         sapisid = cookies.get("SAPISID") or cookies.get("__Secure-3PAPISID")
@@ -48,6 +49,14 @@ class YTDirect:
         if resp.status_code != 200:
             raise Exception(f"API Error {resp.status_code}: {resp.text}")
         return resp.json()
+
+    def test_auth(self):
+        """Tests if the token is actually valid by hitting an authenticated endpoint."""
+        try:
+            self._post("account/account_menu", {})
+            return True
+        except:
+            return False
 
     def search_song(self, query, required_artist=""):
         body = {
@@ -219,7 +228,6 @@ def get_spotify_track_info(url):
     return None
 
 def parse_batch_file(filepath):
-    """Parses batch.txt into a list of playlist dictionaries."""
     playlists = []
     current_playlist = None
     
@@ -233,7 +241,6 @@ def parse_batch_file(filepath):
                 if current_playlist:
                     current_playlist['urls'].append(line)
             else:
-                # It's a title
                 if current_playlist and current_playlist['urls']:
                     playlists.append(current_playlist)
                 current_playlist = {"name": line, "urls": []}
@@ -244,7 +251,6 @@ def parse_batch_file(filepath):
     return playlists
 
 def process_single_playlist(yt, playlist_title, urls):
-    """Processes a single playlist: searches and adds songs."""
     print(f"\n{'='*50}")
     print(f"Processing Playlist: {playlist_title} ({len(urls)} songs)")
     print(f"{'='*50}")
@@ -303,15 +309,20 @@ def main():
         
     try:
         yt = YTDirect("browser.json")
-        print("YouTube Music authenticated.")
     except Exception as e:
         print(f"Auth setup failed: {e}")
-        print("Try running 'python auto_auth.py' again to generate a fresh browser.json.")
         return
+
+    # VERIFY AUTH BEFORE DOING ANYTHING
+    print("Verifying YouTube Music login...")
+    if not yt.test_auth():
+        print("\nERROR: Your login token is invalid or expired!")
+        print("Please delete 'browser.json' and run 'python auto_auth.py' again to get a fresh login.")
+        return
+    print("YouTube Music authenticated.")
 
     final_links = []
 
-    # BATCH MODE
     if os.path.exists("batch.txt"):
         print("\nFound 'batch.txt'. Starting Batch Mode...")
         try:
@@ -322,7 +333,6 @@ def main():
 
         if not playlists:
             print("batch.txt is empty or formatted incorrectly.")
-            print("Format should be:\nPlaylist Name\nurl1\nurl2\n\nPlaylist Name 2\nurl3")
             return
 
         print(f"Loaded {len(playlists)} playlists from batch file.")
@@ -333,12 +343,10 @@ def main():
             if link:
                 final_links.append({"name": pl['name'], "link": link})
             
-            # Wait between playlists to avoid rate limits
             if idx < len(playlists):
                 print("\nWaiting 5 seconds before next playlist to avoid rate limits...")
                 time.sleep(5)
 
-    # SINGLE MODE
     elif os.path.exists("urls.txt"):
         print("\nFound 'urls.txt'. Starting Single Playlist Mode...")
         playlist_title = input("Enter a name for your new YouTube Music playlist (or press Enter for 'Spotify Import'): ").strip()
@@ -353,7 +361,7 @@ def main():
             return
 
         if not urls:
-            print("urls.txt is empty. Please add some Spotify track URLs.")
+            print("urls.txt is empty.")
             return
 
         link = process_single_playlist(yt, playlist_title, urls)
@@ -362,12 +370,10 @@ def main():
             
     else:
         print("Error: Neither 'batch.txt' nor 'urls.txt' found.")
-        print("Create one of these files to get started.")
         return
 
-    # Print final summary
     print("\n" + "="*50)
-    print("🎉 ALL DONE! Here are your playlists:")
+    print("ALL DONE! Here are your playlists:")
     for item in final_links:
         print(f"\n{item['name']}:\n{item['link']}")
     print("="*50)

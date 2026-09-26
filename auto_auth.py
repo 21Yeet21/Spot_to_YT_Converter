@@ -1,20 +1,45 @@
 import json
 import os
 import time
+import requests
+import hashlib
 import undetected_chromedriver as uc
 
 def is_auth_valid():
-    """Checks if browser.json exists and contains the required SAPISID cookie."""
+    """Actually tests the token against YouTube's servers."""
     if not os.path.exists("browser.json"):
         return False
+        
     try:
         with open("browser.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
-        cookie_str = data.get("cookie", "")
-        # If it has the SAPISID cookie, it's valid for our converter!
-        if "SAPISID" in cookie_str or "__Secure-3PAPISID" in cookie_str:
-            return True
-        return False
+            headers = json.load(f)
+            
+        cookie_str = headers.get("cookie", "")
+        cookies = {c.split("=")[0]: c.split("=", 1)[1] for c in cookie_str.split("; ") if "=" in c}
+        sapisid = cookies.get("SAPISID") or cookies.get("__Secure-3PAPISID")
+        if not sapisid:
+            return False
+            
+        origin = "https://music.youtube.com"
+        timestamp = int(time.time())
+        hash_input = f"{timestamp} {sapisid} {origin}"
+        sapisidhash = hashlib.sha1(hash_input.encode('utf-8')).hexdigest()
+        auth_string = f"SAPISIDHASH {timestamp}_{sapisidhash}"
+        
+        session = requests.Session()
+        session.headers.update({
+            "Authorization": auth_string,
+            "Origin": origin,
+            "X-Origin": origin,
+            "User-Agent": headers.get("User-Agent", ""),
+            "Content-Type": "application/json"
+        })
+        
+        # Ping YouTube's account menu. If it returns 200, the token is alive.
+        body = {"context": {"client": {"clientName": "WEB_REMIX", "clientVersion": "1.20240301.01.00"}}}
+        resp = session.post("https://music.youtube.com/youtubei/v1/account/account_menu", json=body)
+        return resp.status_code == 200
+        
     except Exception:
         return False
 
