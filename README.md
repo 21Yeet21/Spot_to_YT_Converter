@@ -1,8 +1,3 @@
-Here is the updated `README.md` that includes the new **Batch Mode** feature, the improved Spotify scraping logic (which bypasses their bot protection), and the strict artist-matching feature. 
-
-Replace your entire `README.md` with this text:
-
-```markdown
 # Spotify to YouTube Music Converter
 
 A free, local, self-hosted Python script to convert Spotify tracks into a YouTube Music playlist. No Spotify Premium required. No Google Cloud Developer account required. No 500-song limits.
