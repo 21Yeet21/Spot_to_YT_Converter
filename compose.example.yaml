@@ -1,0 +1,16 @@
+services:
+  playlist-bridge:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DOWNLOAD_ROOT: /downloads
+      MAX_PLAYLIST_ITEMS: "100"
+      PRIVACY_MONITOR_STATUS_PATH: /monitoring/status.json
+    ports:
+      - "127.0.0.1:8088:8088"
+    volumes:
+      - ./browser.json:/app/browser.json:ro
+      - ./downloads:/downloads
+      - ./monitoring:/monitoring:ro

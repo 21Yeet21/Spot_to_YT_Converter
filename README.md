@@ -85,3 +85,28 @@ A free, local, self-hosted Python script to convert Spotify tracks into a YouTub
 
 ## Disclaimer
 This project is for educational purposes only. It automates browser actions to interact with YouTube Music's internal API. Use it responsibly and respect the terms of service of both Spotify and YouTube.
+## Self-Hosted Web Application (Docker)
+
+This project includes a Flask web interface for managing playlist conversion and media jobs.
+
+### Requirements
+
+- Docker Engine and Docker Compose
+- An authenticated YouTube Music session stored locally as browser.json
+
+### Setup
+
+1. Copy the environment template: `cp .env.example .env`
+2. Set your own BRIDGE_USER and BRIDGE_PASSWORD values in .env. Use a long, random password.
+3. Place your private browser.json file in the project directory. Never commit it to GitHub.
+4. Create runtime directories: `mkdir -p downloads monitoring`
+5. Build and start the application: `docker compose -f compose.example.yaml up -d --build`
+6. Review logs: `docker compose -f compose.example.yaml logs --tail=100`
+
+The example configuration binds port 8088 to localhost only by default.
+
+### Security
+
+- Never commit .env, browser.json, browser profiles, downloads, monitoring state, or databases.
+- Do not expose the application directly to the public internet without suitable access controls and HTTPS.
+- Only download or convert media you are authorized to access.

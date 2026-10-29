@@ -1,3 +1,6 @@
-undetected-chromedriver
-ytmusicapi
-requests
+Flask>=3.1,<4.0
+requests>=2.31,<3.0
+undetected-chromedriver>=3.5,<4.0
+yt-dlp[default,curl-cffi]
+ytmusicapi>=1.12.3,<2.0
+gunicorn>=23,<24

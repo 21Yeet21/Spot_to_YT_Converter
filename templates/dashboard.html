@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0f12">
+<title>Home Control Center</title>
+<style>
+:root{color-scheme:dark;--bg:#0d0f12;--panel:#15191f;--panel2:#10151b;--border:#2b323c;--text:#f2f5f8;--muted:#98a5b5;--green:#54e0a0;--blue:#7eb8ff;--red:#ff8c8c;--amber:#f5c36a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#183326 0%,transparent 38%),radial-gradient(ellipse at 100% 6%,#16263a 0%,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,sans-serif}main{max-width:1120px;margin:0 auto;padding:24px 16px 64px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:32px}.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.13em;text-transform:uppercase;font-size:12px;color:var(--green)}.logo{width:38px;height:38px;border:1px solid #3b7860;border-radius:12px;display:grid;place-items:center;background:#11251b;color:var(--green);font-size:20px}.pill{border:1px solid var(--border);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}.eyebrow{color:var(--green);font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.hero{margin-bottom:28px}h1{font-size:clamp(34px,6vw,56px);line-height:1.03;letter-spacing:-.055em;margin:10px 0 12px}h1 span{color:var(--green)}.intro{max-width:700px;color:var(--muted);font-size:16px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:28px 0 13px}.section-head h2{margin:0;font-size:20px;letter-spacing:-.025em}.section-head p{margin:2px 0 0;color:var(--muted);font-size:12px}.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(5,minmax(0,1fr))}.stat,.panel,.service{background:rgba(21,25,31,.95);border:1px solid var(--border);border-radius:17px;padding:17px;min-width:0}.stat-label{font-size:12px;color:var(--muted);font-weight:700}.stat-value{font-size:clamp(24px,3.5vw,34px);font-weight:850;letter-spacing:-.045em;margin:7px 0 1px}.stat-detail{color:var(--muted);font-size:11px;overflow-wrap:anywhere}.status-dot{display:inline-block;width:8px;height:8px;border-radius:100%;background:var(--green);margin-right:6px;box-shadow:0 0 12px #54e0a055}.service-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.service{display:flex;flex-direction:column;gap:10px;min-height:180px;background:linear-gradient(150deg,#171e25,#11151b)}.service-top{display:flex;align-items:center;justify-content:space-between;gap:9px}.service-icon{width:42px;height:42px;border-radius:12px;background:#172820;color:var(--green);display:grid;place-items:center;font-size:21px;font-weight:850;border:1px solid #254b39}.tag{font-size:10px;text-transform:uppercase;letter-spacing:.07em;border:1px solid #35694f;color:var(--green);padding:4px 7px;border-radius:999px;font-weight:800;white-space:nowrap}.tag.link{border-color:#4a5360;color:var(--muted)}.service h3{font-size:16px;margin:0}.service p{font-size:12px;color:var(--muted);margin:0;flex:1}.service-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.button,.link-button{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:8px 11px;border-radius:10px;border:1px solid var(--border);background:#10151b;color:var(--text);text-decoration:none;font:inherit;font-size:12px;font-weight:800;cursor:pointer}.button.primary{background:var(--green);color:#07130b;border-color:transparent}.button:disabled{opacity:.45;cursor:not-allowed}.split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:14px}.recent{display:grid;gap:9px}.recent-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px;border:1px solid #252e38;border-radius:12px;background:#10151b}.recent-title{font-size:13px;font-weight:800;overflow-wrap:anywhere}.recent-msg{color:var(--muted);font-size:11px;margin-top:3px;overflow-wrap:anywhere}.state{font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850;border:1px solid var(--border);border-radius:7px;padding:4px 6px;color:var(--muted);white-space:nowrap}.state.complete{color:var(--green);border-color:#2c6e50}.state.running{color:var(--amber);border-color:#66532f}.state.failed{color:var(--red);border-color:#633d3d}.state.cancelled{color:var(--muted)}.empty{padding:22px;border:1px dashed #303844;border-radius:12px;color:var(--muted);text-align:center;font-size:12px}.storage-bar{height:9px;border-radius:999px;background:#27313a;overflow:hidden;margin:12px 0}.storage-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#37a96e,#7df0bd);transition:width .3s}.storage-numbers{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted)}.inline-form{display:grid;grid-template-columns:1fr 1.6fr auto;gap:8px;margin-top:13px}.inline-form input{width:100%;min-width:0;height:40px;padding:8px 10px;background:#0b1015;color:var(--text);border:1px solid var(--border);border-radius:9px;font:inherit;font-size:12px}.remove-link{color:var(--red);background:none;border:0;font-size:11px;cursor:pointer}.footer-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:25px;color:#6f7b89;font-size:11px;flex-wrap:wrap}.notice{color:var(--muted);font-size:11px;line-height:1.6;margin-top:13px}a:hover{text-decoration:underline}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}}
+@media(max-width:580px){main{padding:17px 12px 45px}.top{align-items:flex-start;margin-bottom:24px}.pill{max-width:150px;text-align:center}.intro{font-size:14px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:13px}.stat-value{font-size:27px}.service-grid{grid-template-columns:1fr}.service{min-height:0}.section-head{align-items:flex-start}.inline-form{grid-template-columns:1fr}.recent-row{grid-template-columns:minmax(0,1fr) auto}}
+
+.tag.health-ok{color:var(--green);border-color:#35694f}.tag.health-warning{color:var(--amber);border-color:#66532f}.tag.health-fail{color:var(--red);border-color:#633d3d}.tag.health-unknown{color:var(--muted);border-color:#4a5360}.monitor-detail{font-size:11px;color:var(--muted);overflow-wrap:anywhere;line-height:1.55}.monitor-kv{font-size:12px;color:var(--muted);overflow-wrap:anywhere}.monitor-number{font-weight:800;color:var(--text)}
+</style>
+</head>
+<body>
+<main>
+<header class="top"><div class="brand"><div class="logo">⌂</div><div>Home Control Center<span style="display:block;color:var(--muted);letter-spacing:.06em;font-size:10px;margin-top:2px">PRIVATE HOMELAB</span></div></div><div class="pill"><span class="status-dot"></span>VPN-only entry point</div></header>
+<section class="hero"><div class="eyebrow">One place for your server</div><h1>Your home lab.<br><span>At a glance.</span></h1><p class="intro">Open your apps, see recent Playlist Bridge activity, and check download storage from your phone. This dashboard is read-only for system data; it does not change firewall, routing, or privacy-mode settings.</p><div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:17px"><a class="button primary" href="/media">Open Media Studio ↗</a><button class="button" id="refresh" type="button">Refresh status ↻</button><span class="pill" id="last-updated">Loading status…</span></div></section>
+<div class="section-head"><div><h2>Activity</h2><p>Counts from your Playlist Bridge job history</p></div></div>
+<section class="grid stats" id="stats"><div class="stat"><div class="stat-label">Active jobs</div><div class="stat-value">—</div><div class="stat-detail">Queued or running</div></div><div class="stat"><div class="stat-label">Completed</div><div class="stat-value">—</div><div class="stat-detail">Recorded jobs</div></div><div class="stat"><div class="stat-label">Failed</div><div class="stat-value">—</div><div class="stat-detail">Jobs needing attention</div></div><div class="stat"><div class="stat-label">MP3 files</div><div class="stat-value">—</div><div class="stat-detail">Saved on server</div></div><div class="stat"><div class="stat-label">Download storage</div><div class="stat-value">—</div><div class="stat-detail">Free space on download filesystem</div></div></section>
+<div class="section-head"><div><h2>Host & Privacy Hub</h2><p>Read-only checks collected on the server every 20 seconds</p></div><span class="pill" id="privacy-updated">Waiting for host monitor…</span></div>
+<section class="grid stats" id="host-stats"><div class="stat"><div class="stat-label">Host metrics</div><div class="stat-value">—</div><div class="stat-detail">Waiting for first snapshot</div></div></section>
+<div class="section-head"><div><h2>Docker services</h2><p>Container state, health checks, restart counts, CPU and memory</p></div></div>
+<section class="grid service-grid" id="privacy-services"><div class="service"><h3>Loading service status…</h3><p>The host collector publishes a sanitized snapshot every 20 seconds.</p></div></section>
+<section class="split" style="margin-top:14px"><div class="panel"><h2 style="margin:0;font-size:17px">Service probes</h2><p class="notice">Local DNS and Tor checks. A listening port alone is not proof of end-to-end privacy.</p><div id="privacy-checks" class="recent"><div class="empty">Waiting for host monitor…</div></div></div><aside class="panel"><h2 style="margin:0;font-size:17px">Routing integrity</h2><p class="notice">Configuration-only checks; no routing or firewall rules are changed.</p><div id="privacy-routing" class="recent"><div class="empty">Waiting for host monitor…</div></div><hr style="border:0;border-top:1px solid var(--border);margin:16px 0"><h3 style="margin:0;font-size:14px">Assigned privacy modes</h3><div id="privacy-modes" class="recent" style="margin-top:10px"></div><p id="privacy-notice" class="notice"></p></aside></section>
+<div class="section-head"><div><h2>Services & shortcuts</h2><p>Built-in links plus your own optional quick links</p></div></div>
+<section class="grid service-grid" id="services">
+<article class="service"><div class="service-top"><div class="service-icon">♫</div><span class="tag">This app</span></div><h3>Playlist Bridge · Media Studio</h3><p>Spotify playlist conversion, YouTube-to-MP3 jobs, direct stream, queue, and ZIP downloads.</p><div class="service-actions"><a class="button primary" href="/media">Open Media Studio ↗</a></div></article>
+<article class="service"><div class="service-top"><div class="service-icon">▣</div><span class="tag link">Existing service</span></div><h3>Existing Flask app</h3><p>Your other app on port 5000. This is a shortcut only; dashboard does not restart or modify it.</p><div class="service-actions"><a class="button" href="#" id="existing-flask-link" target="_blank" rel="noopener noreferrer">Open port 5000 ↗</a></div></article>
+</section>
+<div class="section-head"><div><h2>Recent jobs</h2><p>Latest eight jobs; open Media Studio to cancel jobs or manage files</p></div><a class="button" href="/media">Manage queue ↗</a></div>
+<section class="split"><div class="panel"><div id="recent" class="recent"><div class="empty">Loading recent jobs…</div></div></div><aside class="panel"><h2 style="margin:0;font-size:17px">Download storage</h2><p style="margin:5px 0 0;color:var(--muted);font-size:12px">Files saved by Playlist Bridge. This is the filesystem used by the download volume, not a full host hardware monitor.</p><div class="storage-bar"><span id="storage-fill"></span></div><div class="storage-numbers"><span id="storage-used">Used: —</span><span id="storage-free">Free: —</span></div><p id="storage-extra" class="notice">Storage information loads with the dashboard status.</p><hr style="border:0;border-top:1px solid var(--border);margin:18px 0"><h2 style="margin:0;font-size:17px">Add a quick link</h2><p class="notice">Add Pi-hole, a router page, or another web app. Custom links are saved only in this browser on this device.</p><form id="link-form" class="inline-form"><input id="link-name" maxlength="40" required placeholder="Service name"><input id="link-url" maxlength="300" required placeholder="http://HOST:PORT/ or /path"><button class="button primary" type="submit">Add</button></form><div id="custom-links" class="recent" style="margin-top:12px"></div></aside></section>
+<div class="footer-row"><span>Home Control Center · Playlist Bridge</span><span id="refresh-note">Auto-refresh every 8 seconds</span><span>Private endpoint: <span id="private-endpoint">current host:8088</span></span></div>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const fmtBytes = n => { if (!Number.isFinite(Number(n)) || Number(n) < 0) return '—'; const units=['B','KB','MB','GB','TB']; let v=Number(n), i=0; while(v>=1024 && i<units.length-1){v/=1024;i++;} return `${v.toFixed(i===0?0:1)} ${units[i]}`; };
+const fmtTime = s => { try { return new Date(Number(s)*1000).toLocaleString(); } catch { return ''; } };
+function node(tag, cls, text) { const n=document.createElement(tag); if(cls)n.className=cls; if(text!==undefined)n.textContent=text; return n; }
+async function loadSummary(){
+  const r=await fetch('/api/dashboard/summary',{cache:'no-store'}); const d=await r.json().catch(()=>({})); if(!r.ok) throw new Error(d.error||`Status failed (${r.status})`);
+  const s=d.stats||{}; const active=(s.running||0)+(s.queued||0); const disk=s.disk||{};
+  const vals=[{l:'Active jobs',v:active,d:`${s.queued||0} queued · ${s.running||0} running`},{l:'Completed',v:s.complete||0,d:`${s.total_jobs||0} total recorded jobs`},{l:'Failed',v:s.failed||0,d:'Jobs needing attention'},{l:'MP3 files',v:s.mp3_count||0,d:`${fmtBytes(s.mp3_bytes||0)} of audio stored`},{l:'Download storage',v:fmtBytes(disk.free_bytes||0),d:`free of ${fmtBytes(disk.total_bytes||0)}`}];
+  const grid=$('stats'); grid.replaceChildren(); for(const v of vals){const card=node('article','stat');card.append(node('div','stat-label',v.l),node('div','stat-value',String(v.v)),node('div','stat-detail',v.d));grid.append(card);}
+  const total=Number(disk.total_bytes)||0, used=Number(disk.used_bytes)||0; $('storage-fill').style.width=total?`${Math.max(0,Math.min(100,used/total*100))}%`:'0%'; $('storage-used').textContent=`Filesystem used: ${fmtBytes(used)}`; $('storage-free').textContent=`Free: ${fmtBytes(disk.free_bytes||0)}`; $('storage-extra').textContent=`MP3 library: ${s.mp3_count||0} file(s), ${fmtBytes(s.mp3_bytes||0)}. This metric describes the filesystem containing /downloads.`;
+  const recent=$('recent'); recent.replaceChildren(); const rows=d.recent||[];
+  if(!rows.length){recent.append(node('div','empty','No jobs yet. Open Media Studio to convert a playlist or download media.'));}
+  for(const job of rows){const row=node('div','recent-row');const left=node('div','');const title=job.title||(job.kind==='media_download'?'YouTube audio download':'Spotify playlist conversion');left.append(node('div','recent-title',title));const detail=job.total_items?`${job.phase||job.status} · ${job.current_item||0}/${job.total_items} items`:(job.message||job.phase||'');left.append(node('div','recent-msg',detail));left.append(node('div','recent-msg',fmtTime(job.updated_at)));const state=node('span','state '+job.status,job.status);row.append(left,state);recent.append(row);}
+  $('last-updated').textContent=`Updated ${new Date().toLocaleTimeString()}`;
+}
+const privacySeverityLabel = s => ({ok:'OK',warning:'Warning',fail:'Failed',unknown:'Unverified'}[s]||String(s||'Unknown'));
+const healthClass = s => ({ok:'health-ok',warning:'health-warning',fail:'health-fail',unknown:'health-unknown'}[s]||'health-unknown');
+const fmtDuration = seconds => { if(!Number.isFinite(Number(seconds))||Number(seconds)<0)return '—'; let s=Math.floor(Number(seconds)); const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600);s%=3600;const m=Math.floor(s/60);return d?`${d}d ${h}h`:(h?`${h}h ${m}m`:`${m}m`); };
+const fmtRate = bps => `${fmtBytes(Number(bps)||0)}/s`;
+function monitorRow(host, name, detail, severity='unknown'){
+  const row=node('div','recent-row'), left=node('div',''), title=node('div','recent-title',name), msg=node('div','recent-msg',detail||'');
+  left.append(title,msg); const badge=node('span','tag '+healthClass(severity),privacySeverityLabel(severity)); row.append(left,badge);host.append(row);
+}
+async function loadPrivacy(){
+  const r=await fetch('/api/privacy/status',{cache:'no-store'});const d=await r.json().catch(()=>({}));
+  if(!r.ok)throw new Error(d.error||`Privacy monitor unavailable (${r.status})`);
+  const h=d.host||{},m=h.memory||{},disk=h.disk_root||{},temp=h.temperatures||{},wg=d.wireguard||{},routing=d.routing||{};
+  const pct=v=>v===null||v===undefined?'—':`${Number(v).toFixed(1)}%`;
+  const tempText=temp.cpu_package_c===null||temp.cpu_package_c===undefined?'Unavailable':`${Number(temp.cpu_package_c).toFixed(1)}°C`;
+  const ninterfaces=h.interfaces||[],lan=ninterfaces.find(x=>x.name==='enp7s0'),vpn=ninterfaces.find(x=>x.name==='wg0');
+  const hostValues=[
+    {l:'CPU usage',v:pct(h.cpu_percent),d:`${h.cpu_cores??'—'} host cores · load ${h.load_1m??'—'} / ${h.load_5m??'—'} / ${h.load_15m??'—'}`},
+    {l:'RAM used',v:pct(m.used_percent),d:`${fmtBytes(m.used_bytes||0)} used · ${fmtBytes(m.available_bytes||0)} available`},
+    {l:'CPU package temp',v:tempText,d:(temp.sensors||[]).slice(0,3).map(x=>`${x.label}: ${x.celsius}°C`).join(' · ')||'No temperature sensors reported'},
+    {l:'Root disk used',v:pct(disk.used_percent),d:`${fmtBytes(disk.free_bytes||0)} free of ${fmtBytes(disk.total_bytes||0)}`},
+    {l:'Uptime',v:fmtDuration(h.uptime_seconds),d:`Swap used: ${fmtBytes(m.swap_used_bytes||0)} / ${fmtBytes(m.swap_total_bytes||0)}`},
+    {l:'WireGuard peers',v:wg.available?`${wg.recent_3m||0}/${wg.configured_peers||0}`:'Unavailable',d:`Handshakes in 3 min · ${wg.recent_24h||0} seen in 24 h`},
+    {l:'Marked routing rules',v:String(routing.fwmark_66_lookup_102_count??'—'),d:'Expected exactly 1 fwmark 0x66 → table 102 rule'},
+    {l:'LAN throughput',v:lan?`${fmtRate(lan.rx_bytes_per_sec)} ↓`:'—',d:lan?`${fmtRate(lan.tx_bytes_per_sec)} upload · wg0 RX ${fmtRate(vpn?.rx_bytes_per_sec||0)}`:'Network counters unavailable'}
+  ];
+  const hostGrid=$('host-stats');hostGrid.replaceChildren();
+  for(const v of hostValues){const card=node('article','stat'),l=node('div','stat-label',v.l),val=node('div','stat-value',v.v),detail=node('div','stat-detail',v.d);card.append(l,val,detail);hostGrid.append(card);}
+
+  const services=$('privacy-services');services.replaceChildren();
+  for(const c of (d.docker||{}).containers||[]){
+    const card=node('article','service'),top=node('div','service-top'),ico=node('div','service-icon','▣'),tag=node('span','tag '+healthClass(c.severity),privacySeverityLabel(c.severity));
+    top.append(ico,tag); const title=node('h3','',c.name);
+    const line1=`State: ${c.state||'unknown'} · Health: ${c.health||'unknown'} · Restarts: ${c.restart_count??'—'}`;
+    const line2=`CPU: ${c.cpu_percent===null||c.cpu_percent===undefined?'—':Number(c.cpu_percent).toFixed(2)+'%'} · RAM: ${c.memory_used_bytes===null||c.memory_used_bytes===undefined?'—':fmtBytes(c.memory_used_bytes)} · Network mode: ${c.network_mode||'unknown'}`;
+    const detail=node('p','',c.detail||'');const usage=node('div','monitor-detail',line1+'\n'+line2);usage.style.whiteSpace='pre-line';card.append(top,title,detail,usage);services.append(card);
+  }
+  if(!services.children.length)services.append(node('div','empty','No container data was returned.'));
+
+  const checks=$('privacy-checks');checks.replaceChildren();
+  for(const item of d.checks||[])monitorRow(checks,item.name,item.detail,item.status);
+  const routes=$('privacy-routing');routes.replaceChildren();
+  monitorRow(routes,'fwmark 0x66 → table 102',routing.detail,routing.severity);
+  const tables=routing.tables||{};
+  for(const [id,info] of Object.entries(tables)){monitorRow(routes,`Routing table ${id}`,`${info.route_count} route(s) · default ${info.has_default?'present':'not found'}`,info.readable?(info.route_count?'ok':'warning'):'unknown');}
+  const fw=d.firewall||{}; const nft=fw.nft||{},legacy=fw.legacy||{};
+  monitorRow(routes,'iptables (default backend)',`${fw.default_backend||'unknown'} · filter ${nft.filter_rules??'—'} · NAT ${nft.nat_rules??'—'} · mangle ${nft.mangle_rules??'—'}`,nft.available?'ok':'unknown');
+  monitorRow(routes,'iptables-legacy',legacy.available?`filter ${legacy.filter_rules??'—'} · NAT ${legacy.nat_rules??'—'} · mangle ${legacy.mangle_rules??'—'}`:'Backend unavailable',legacy.available?'unknown':'unknown');
+  const modes=$('privacy-modes');modes.replaceChildren();const dc=d.device_modes||{};
+  if(dc.available){for(const key of ['no_ads','vpn_only','full_privacy','fully_hidden','panic'])monitorRow(modes,(dc.labels||{})[key]||key,`${(dc.counts||{})[key]||0} device(s) assigned`,'unknown');}
+  else modes.append(node('div','empty','Could not read devices.json or recognize its format.'));
+  $('privacy-notice').textContent=d.notice||'Read-only diagnostic snapshot; end-to-end egress checks from each client are not yet implemented.';
+  $('privacy-updated').textContent=`Snapshot ${d.snapshot_stale?'STALE · ':''}${Math.round(d.snapshot_age_seconds||0)}s old · ${new Date(Number(d.collected_at)*1000).toLocaleTimeString()}`;
+  if(d.snapshot_stale)$('privacy-updated').style.color='var(--red)';else $('privacy-updated').style.color='var(--muted)';
+}
+
+function safeUrl(raw){raw=raw.trim(); if(raw.startsWith('/')&&!raw.startsWith('//'))return raw; try{const u=new URL(raw); if((u.protocol==='http:'||u.protocol==='https:')&&!u.username&&!u.password)return u.href;}catch{} return null;}
+function getCustom(){try{const a=JSON.parse(localStorage.getItem('homelabQuickLinks')||'[]');return Array.isArray(a)?a.filter(x=>x&&typeof x.name==='string'&&typeof x.url==='string'):[];}catch{return [];}}
+function setCustom(items){localStorage.setItem('homelabQuickLinks',JSON.stringify(items));}
+function renderCustom(){const host=$('custom-links');host.replaceChildren();const links=getCustom();if(!links.length){host.append(node('div','empty','No custom links added on this device yet.'));return;}for(const item of links){const row=node('div','recent-row'),left=node('div',''),a=node('a','recent-title',item.name);a.href=item.url;if(!item.url.startsWith('/')){a.target='_blank';a.rel='noopener noreferrer';}left.append(a,node('div','recent-msg',item.url));const del=node('button','remove-link','Remove');del.type='button';del.addEventListener('click',()=>{setCustom(getCustom().filter(x=>x.id!==item.id));renderCustom();});row.append(left,del);host.append(row);}}
+$('link-form').addEventListener('submit',e=>{e.preventDefault();const name=$('link-name').value.trim();const url=safeUrl($('link-url').value);if(!name||!url){alert('Use a name and a relative path or an HTTP(S) URL without embedded credentials.');return;}const links=getCustom();links.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name,url});setCustom(links);$('link-name').value='';$('link-url').value='';renderCustom();});
+async function refresh(){
+  let summaryOk=true;
+  try{await loadSummary();}catch(e){summaryOk=false;$('last-updated').textContent=e.message;}
+  try{await loadPrivacy();}catch(e){const box=$('privacy-services');if(box)box.replaceChildren(node('div','empty',e.message||'Privacy monitor unavailable.'));$('privacy-updated').textContent='Monitor unavailable';}
+  $('refresh-note').textContent=summaryOk?'Auto-refresh every 8 seconds':'App summary refresh failed';
+}
+$('refresh').addEventListener('click',refresh);renderCustom();refresh();setInterval(refresh,8000);
+</script>
+
+<script>
+(() => {
+  const host = window.location.hostname;
+
+  const existingApp = document.getElementById("existing-flask-link");
+  if (existingApp && host) {
+    existingApp.href = `http://${host}:5000/`;
+  }
+
+  const endpoint = document.getElementById("private-endpoint");
+  if (endpoint && host) {
+    endpoint.textContent = `${host}:8088`;
+  }
+})();
+</script>
+
+</body>
+</html>

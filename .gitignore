@@ -1,11 +1,32 @@
-# Sensitive login files
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
 browser.json
 chrome_profile/
 ff_profile/
+*_profile/
 
-# Python cache
+# Downloads, runtime data and databases
+downloads/
+monitoring/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+venv/
+.venv/
 
-# Debug files
+# Debug and backup files
 search_dump.json
+*.backup
+*.bak
+*.before-*
+
+# Timestamped backup files
+*.backup-*
+*.bak-*

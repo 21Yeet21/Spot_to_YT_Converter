@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0f12">
+<title>Playlist Bridge · Media Studio</title>
+<style>
+:root{color-scheme:dark;--bg:#0d0f12;--panel:#15191f;--panel2:#101419;--border:#2b323c;--text:#f2f5f8;--muted:#98a5b5;--green:#54e0a0;--blue:#7eb8ff;--red:#ff8c8c;--amber:#f5c36a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#183326 0%,transparent 38%),radial-gradient(ellipse at 100% 6%,#16263a 0%,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,sans-serif}main{max-width:1060px;margin:0 auto;padding:26px 16px 64px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:28px}.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:.13em;text-transform:uppercase;font-size:12px;color:var(--green)}.logo{width:36px;height:36px;border:1px solid #3b7860;border-radius:11px;display:grid;place-items:center;background:#11251b;color:var(--green);font-size:18px}.pill{border:1px solid var(--border);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px;white-space:nowrap}.hero{margin:0 0 26px}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(34px,6vw,58px);line-height:1.02;letter-spacing:-.055em;margin:10px 0 12px}h1 span{color:var(--green)}.intro{max-width:690px;color:var(--muted);font-size:16px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 15px}.tab{width:auto;min-height:42px;margin:0;padding:10px 15px;border:1px solid var(--border);border-radius:12px;background:#11161c;color:var(--muted);font-weight:750}.tab.active{color:var(--text);border-color:#387a5c;background:#11241a;box-shadow:inset 0 0 0 1px #1e4e38}.grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:16px}.panel{background:rgba(21,25,31,.95);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:0 22px 70px #0003}.panel h2{margin:0 0 4px;font-size:20px;letter-spacing:-.025em}.sub{color:var(--muted);font-size:13px;margin:0 0 20px}.form-row{margin:16px 0}.label-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}label,.label{font-weight:750;font-size:13px}.help{color:var(--muted);font-size:12px;font-weight:500}input[type=url],select{width:100%;height:50px;border-radius:12px;border:1px solid var(--border);background:#0c1015;color:var(--text);padding:0 13px;font:inherit;outline:none}input:focus,select:focus{border-color:var(--green)}.primary{width:100%;min-height:49px;margin-top:6px;border:0;border-radius:12px;background:var(--green);color:#06130b;font:inherit;font-weight:850;cursor:pointer}.primary:disabled{opacity:.55;cursor:wait}.secondary{width:auto;min-height:34px;margin:0;padding:7px 10px;border:1px solid var(--border);border-radius:9px;background:#11161c;color:var(--muted);font:inherit;font-size:12px;cursor:pointer}.consent{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:12px;line-height:1.5;margin:14px 0}.consent input{margin-top:3px;accent-color:var(--green)}.statusbox{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:13px;margin-top:16px;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.notice{font-size:12px;color:var(--muted);margin:15px 0 0}.feature-list{display:grid;gap:10px}.feature{display:flex;gap:11px;align-items:flex-start;padding:12px;border-radius:12px;background:#10151b;border:1px solid #222a34}.feature-icon{height:32px;width:32px;border-radius:10px;display:grid;place-items:center;background:#172820;color:var(--green);flex:none}.feature b{display:block;font-size:13px}.feature span{display:block;color:var(--muted);font-size:12px;margin-top:2px}.jobs-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:28px 0 12px}.jobs-head h2{margin:0;font-size:21px}.jobs{display:grid;gap:11px}.job{border:1px solid var(--border);border-radius:15px;padding:15px;background:rgba(21,25,31,.88);min-width:0}.job-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.job-title{font-weight:800;overflow-wrap:anywhere}.job-msg{font-size:13px;color:var(--muted);margin-top:5px;overflow-wrap:anywhere}.state{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:4px 7px;border:1px solid var(--border);border-radius:7px;color:var(--muted);white-space:nowrap}.state.complete{color:var(--green);border-color:#2c6e50}.state.failed{color:var(--red);border-color:#633d3d}.state.running{color:var(--amber);border-color:#66532f}.state.cancelled{color:var(--muted);border-color:#454f5b}.danger{color:var(--red);border-color:#633d3d}.bar{height:6px;border-radius:99px;overflow:hidden;background:#252d37;margin-top:12px}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,#37a96e,#7df0bd);transition:width .25s}.job-bottom{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}.file-link,.result-link{color:var(--blue);font-size:13px;text-decoration:none;font-weight:750;overflow-wrap:anywhere}.empty{border:1px dashed #303844;border-radius:14px;padding:20px;color:var(--muted);text-align:center;font-size:13px}.hidden{display:none!important}footer{text-align:center;color:#6f7b89;font-size:12px;margin-top:26px}a:hover{text-decoration:underline}@media(max-width:760px){main{padding:18px 12px 48px}.grid{grid-template-columns:1fr}.panel{padding:17px;border-radius:16px}.top{align-items:flex-start}.pill{white-space:normal;text-align:center}.intro{font-size:14px}.hero{margin-bottom:20px}.job-top{gap:8px}}
+
+.bulk-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 13px;padding:12px 14px;background:#10151b;border:1px solid var(--border);border-radius:13px}.bulk-select{display:flex;align-items:center;gap:8px;margin:0;color:var(--text);font-size:13px}.bulk-select input,.file-choice input{accent-color:var(--green)}.bulk-tools .secondary:disabled{opacity:.45;cursor:not-allowed}.selection-count{font-size:12px;color:var(--muted)}.file-choice{display:flex;align-items:center;gap:8px;border:1px solid #26303a;border-radius:9px;padding:7px 9px;margin-top:6px;font-weight:500;font-size:12px;min-width:0}.file-choice input{flex:none}.file-choice .file-link{overflow-wrap:anywhere;min-width:0}.zip-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}.archive-action{display:inline-flex;align-items:center;gap:6px}
+</style>
+</head>
+<body>
+<main>
+  <header class="top"><div class="brand"><div class="logo">↗</div><div>Playlist Bridge <span style="display:block;color:var(--muted);letter-spacing:.06em;font-size:10px;margin-top:2px">MEDIA STUDIO</span></div></div><div class="pill"><a href="/" style="color:var(--green);text-decoration:none;font-weight:800">← DASHBOARD</a> &nbsp;·&nbsp; Private home server · WireGuard</div></header>
+  <section class="hero"><div class="eyebrow">Your library, your workflow</div><h1>Move music.<br><span>Manage media.</span></h1><p class="intro">Convert public Spotify playlist metadata into a YouTube Music playlist, or queue YouTube videos and playlists for MP3 conversion. Jobs run on your server while you use your phone.</p></section>
+  <nav class="tabs" aria-label="Features"><button class="tab active" data-tab="convert">Spotify → YouTube Music</button><button class="tab" data-tab="download">Media downloads</button></nav>
+
+  <section id="convert-panel" class="grid">
+    <div class="panel"><h2>Playlist converter</h2><p class="sub">Find likely track matches and create a private YouTube Music playlist.</p>
+      <form id="spotify-form"><div class="form-row"><div class="label-row"><label for="spotify-url">Public Spotify playlist URL</label><span class="help">Public playlists only</span></div><input id="spotify-url" type="url" required placeholder="https://open.spotify.com/playlist/…" autocomplete="url"></div><button class="primary" id="spotify-submit" type="submit">Convert playlist ↗</button></form>
+      <div id="spotify-status" class="statusbox" role="status" aria-live="polite">Ready. Paste a playlist URL to start.</div>
+      <p class="notice">Uses public playlist metadata and your existing YouTube Music session. Matches are approximate; uncertain tracks can be skipped. It does not download Spotify audio.</p>
+    </div>
+    <aside class="panel"><h2>What happens next</h2><p class="sub">A background job handles the slow work.</p><div class="feature-list"><div class="feature"><div class="feature-icon">01</div><div><b>Read playlist metadata</b><span>Load titles and artists from a public Spotify playlist.</span></div></div><div class="feature"><div class="feature-icon">02</div><div><b>Match carefully</b><span>Search YouTube Music and skip uncertain matches.</span></div></div><div class="feature"><div class="feature-icon">03</div><div><b>Create a private playlist</b><span>Review the result in your YouTube Music account.</span></div></div></div></aside>
+  </section>
+
+  <section id="download-panel" class="grid hidden">
+    <div class="panel"><h2>YouTube media downloader</h2><p class="sub">Queue one video or a playlist and extract audio to MP3 with FFmpeg.</p>
+      <form id="download-form"><div class="form-row"><div class="label-row"><label for="media-url">YouTube URL</label><span class="help">HTTPS links only</span></div><input id="media-url" type="url" required placeholder="https://www.youtube.com/watch?v=…" autocomplete="url"></div>
+      <div class="form-row"><div class="label-row"><label for="download-mode">Download mode</label></div><select id="download-mode"><option value="video">Single video</option><option value="playlist">Playlist (first {{ max_playlist_items }} items maximum)</option></select></div>
+      <div class="form-row"><div class="label-row"><label for="audio-quality">MP3 quality</label><span class="help">Smaller file = faster transfer</span></div><select id="audio-quality"><option value="128" selected>128 kbps · smaller / faster</option><option value="192">192 kbps · balanced</option><option value="320">320 kbps · larger file</option></select></div>
+      <label class="consent"><input id="rights-confirm" type="checkbox" required><span>I own this media or have permission to download and convert it. I will respect applicable laws and the source service’s terms.</span></label>
+      <button class="primary" id="download-submit" type="submit">Add to server queue ↓</button></form>
+      <button class="secondary" id="stream-submit" type="button" style="width:100%;min-height:44px;margin-top:10px">Stream a single MP3 straight to this phone ↘</button>
+      <button class="secondary danger hidden" id="stream-cancel" type="button" style="width:100%;min-height:40px;margin-top:8px">Cancel direct stream</button>
+      <div id="download-status" class="statusbox" role="status" aria-live="polite">Choose a quality. Direct stream is for one video; it starts the phone download while the server converts audio and does not save the completed MP3 on the server.</div>
+      <p class="notice">To download a whole playlist, paste its YouTube playlist URL once and choose <b>Playlist</b>. When it finishes, use <b>Download all MP3s as ZIP</b>—you do not need to tap every song. You can also select individual songs or select all completed MP3s for one combined ZIP. The ZIP groups songs into folders by source job so you can extract them into a folder on your phone. Playlist jobs are limited to the first {{ max_playlist_items }} items. Only HTTPS YouTube links are accepted; the direct stream supports one video, not playlists.</p>
+    </div>
+    <aside class="panel"><h2>Media tools</h2><p class="sub">Inspired by media-manager patterns such as queue, progress, and saved files.</p><div class="feature-list"><div class="feature"><div class="feature-icon">↻</div><div><b>Sequential queue</b><span>One download runs at a time to keep the server responsive.</span></div></div><div class="feature"><div class="feature-icon">♫</div><div><b>MP3 output</b><span>Choose 128/192/320 kbps; 128 kbps cuts the phone transfer size.</span></div></div><div class="feature"><div class="feature-icon">⇩</div><div><b>Direct phone stream</b><span>For single videos, MP3 bytes are streamed to the phone as they are produced.</span></div></div></div></aside>
+  </section>
+
+  <section class="jobs-section"><div class="jobs-head"><h2>Queue & history</h2><button class="secondary" id="refresh-jobs" type="button">Refresh</button></div>
+    <div class="bulk-tools"><label class="bulk-select"><input id="select-all-files" type="checkbox"> Select all downloaded MP3s</label><button class="secondary" id="download-selected" type="button" disabled>Download selected as ZIP ↓</button><span class="selection-count" id="selection-count">0 files selected</span></div>
+    <div id="jobs" class="jobs"><div class="empty">Loading job history…</div></div></section>
+  <footer>Playlist Bridge · Local processing · Keep your browser session file private</footer>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const tabs = [...document.querySelectorAll('[data-tab]')];
+tabs.forEach(btn => btn.addEventListener('click', () => {
+  tabs.forEach(t => t.classList.toggle('active', t === btn));
+  $('convert-panel').classList.toggle('hidden', btn.dataset.tab !== 'convert');
+  $('download-panel').classList.toggle('hidden', btn.dataset.tab !== 'download');
+}));
+async function api(path, options={}) {
+  const response = await fetch(path, {...options, cache: 'no-store', headers: {...(options.headers||{}), ...(options.body ? {'Content-Type':'application/json'} : {})}});
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || `Request failed (${response.status}).`);
+  return data;
+}
+function el(tag, cls, text) { const node = document.createElement(tag); if(cls) node.className=cls; if(text !== undefined) node.textContent=text; return node; }
+let availableFiles = [];
+const selectedFileKeys = new Set();
+let lastJobs = [];
+function fileKey(jobId, filename) { return `${jobId}\u0000${filename}`; }
+function updateBulkControls() {
+  const selectable = availableFiles.filter(item => item && item.job_id && item.filename);
+  const selectedCount = selectable.filter(item => selectedFileKeys.has(fileKey(item.job_id, item.filename))).length;
+  const master = $('select-all-files');
+  master.disabled = selectable.length === 0;
+  master.checked = selectable.length > 0 && selectedCount === selectable.length;
+  master.indeterminate = selectedCount > 0 && selectedCount < selectable.length;
+  $('download-selected').disabled = selectedCount === 0;
+  $('selection-count').textContent = `${selectedCount} of ${selectable.length} files selected`;
+}
+function renderJobs(jobs) {
+  lastJobs = jobs;
+  availableFiles = [];
+  const list = $('jobs'); list.replaceChildren();
+  if (!jobs.length) {
+    list.appendChild(el('div','empty','No jobs yet. Start a conversion or media download above.'));
+    selectedFileKeys.clear(); updateBulkControls(); return;
+  }
+  for (const job of jobs) {
+    const card = el('article','job');
+    const top = el('div','job-top'); const left = el('div','');
+    const title = job.title || (job.kind === 'media_download' ? (job.mode === 'playlist' ? 'YouTube playlist download' : 'YouTube MP3 download') : 'Spotify playlist conversion');
+    left.appendChild(el('div','job-title',title));
+    left.appendChild(el('div','job-msg',job.message || job.phase || ''));
+    const state = el('span','state '+job.status,job.status); top.append(left,state); card.appendChild(top);
+    if (job.status === 'running' || job.status === 'queued') {
+      const bar = el('div','bar'); const fill = el('span',''); fill.style.width = `${Math.max(0,Math.min(100,job.percent||0))}%`; bar.appendChild(fill); card.appendChild(bar);
+      const details = job.total_items ? `${job.current_item||0}/${job.total_items} items` : `${Math.round(job.percent||0)}%`;
+      card.appendChild(el('div','job-msg',`${job.phase || ''} · ${details}`));
+    }
+    const bottom = el('div','job-bottom');
+    if (job.result_url) { const a=el('a','result-link','Open YouTube Music playlist ↗'); a.href=job.result_url; a.target='_blank'; a.rel='noopener noreferrer'; bottom.appendChild(a); }
+    const files = job.files || [];
+    if (job.kind === 'media_download' && job.status === 'complete' && files.length) {
+      for (const file of files) {
+        const item = {job_id: job.id, filename: file.name, url: file.url};
+        availableFiles.push(item);
+        const label = el('label','file-choice');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = selectedFileKeys.has(fileKey(job.id, file.name));
+        checkbox.setAttribute('aria-label', `Select ${file.name}`);
+        checkbox.addEventListener('change', () => {
+          const key = fileKey(job.id, file.name);
+          if (checkbox.checked) selectedFileKeys.add(key); else selectedFileKeys.delete(key);
+          updateBulkControls();
+        });
+        const a = el('a','file-link',file.name); a.href = file.url;
+        label.append(checkbox, a); card.appendChild(label);
+      }
+      const zip = el('a','secondary zip-link',`Download all ${files.length} MP3s as ZIP ↓`);
+      zip.href = `/api/jobs/${job.id}/archive`;
+      zip.title = 'Download all tracks from this job together, grouped in a folder inside the ZIP.';
+      bottom.appendChild(zip);
+    } else if (job.kind==='media_download' && job.status==='complete' && !files.length) {
+      bottom.appendChild(el('span','job-msg','No completed files were recorded.'));
+    }
+    if (job.status==='failed' && job.error) bottom.appendChild(el('div','job-msg',job.error));
+    if (job.status==='queued' || job.status==='running') {
+      const cancel=el('button','secondary danger',job.phase==='Cancelling'?'Cancelling…':'Cancel'); cancel.type='button'; cancel.disabled=job.phase==='Cancelling';
+      cancel.addEventListener('click', async()=>{ cancel.disabled=true; cancel.textContent='Cancelling…'; try { await api(`/api/jobs/${job.id}/cancel`,{method:'POST'}); await refreshJobs(); } catch(e){ alert(e.message); cancel.disabled=false; cancel.textContent='Cancel'; }}); bottom.appendChild(cancel);
+    } else {
+      const del=el('button','secondary','Remove'); del.type='button'; del.addEventListener('click', async()=>{ try { await api(`/api/jobs/${job.id}`,{method:'DELETE'}); await refreshJobs(); } catch(e){ alert(e.message); }}); bottom.appendChild(del);
+    }
+    if (bottom.childNodes.length) card.appendChild(bottom);
+    list.appendChild(card);
+  }
+  const visible = new Set(availableFiles.map(item => fileKey(item.job_id, item.filename)));
+  for (const key of selectedFileKeys) if (!visible.has(key)) selectedFileKeys.delete(key);
+  updateBulkControls();
+}
+$('select-all-files').addEventListener('change', () => {
+  for (const item of availableFiles) {
+    const key = fileKey(item.job_id, item.filename);
+    if ($('select-all-files').checked) selectedFileKeys.add(key); else selectedFileKeys.delete(key);
+  }
+  renderJobs(lastJobs);
+});
+$('download-selected').addEventListener('click', async () => {
+  const items = availableFiles.filter(item => selectedFileKeys.has(fileKey(item.job_id, item.filename)))
+    .map(item => ({job_id: item.job_id, filename: item.filename}));
+  if (!items.length) return;
+  const btn = $('download-selected');
+  btn.disabled = true; btn.textContent = 'Preparing ZIP…';
+  try {
+    const result = await api('/api/archive', {method:'POST', body:JSON.stringify({items})});
+    window.location.assign(result.download_url);
+  } catch (error) {
+    alert(error.message || 'Could not prepare the selected files.');
+    btn.disabled = false;
+  } finally {
+    btn.textContent = 'Download selected as ZIP ↓';
+    updateBulkControls();
+  }
+});
+let polling = false;
+async function refreshJobs() {
+  if (polling) return; polling=true;
+  try {
+    const jobs = await api('/api/jobs'); renderJobs(jobs);
+    const active = jobs.some(j => j.status==='queued' || j.status==='running');
+    if (active) window.setTimeout(() => { polling=false; refreshJobs(); }, 1600);
+  } catch(e) { $('jobs').replaceChildren(el('div','empty',e.message)); }
+  finally { polling=false; }
+}
+$('refresh-jobs').addEventListener('click',refreshJobs);
+$('spotify-form').addEventListener('submit',async(e)=>{
+  e.preventDefault(); const btn=$('spotify-submit'); btn.disabled=true; btn.textContent='Queuing…'; $('spotify-status').textContent='Adding the conversion to the queue…';
+  try { const job=await api('/api/jobs/spotify',{method:'POST',body:JSON.stringify({url:$('spotify-url').value.trim()})}); $('spotify-status').textContent='Queued. Track progress in Queue & history below.'; $('spotify-url').value=''; await refreshJobs(); }
+  catch(err){ $('spotify-status').textContent=err.message; }
+  finally { btn.disabled=false; btn.textContent='Convert playlist ↗'; }
+});
+$('download-form').addEventListener('submit',async(e)=>{
+  e.preventDefault(); const btn=$('download-submit'); btn.disabled=true; btn.textContent='Queuing…'; $('download-status').textContent='Adding media to the queue…';
+  try { await api('/api/jobs/download',{method:'POST',body:JSON.stringify({url:$('media-url').value.trim(),mode:$('download-mode').value,quality:$('audio-quality').value,authorized:$('rights-confirm').checked})}); $('download-status').textContent='Queued. You can cancel any queued or running job from Queue & history.'; $('media-url').value=''; $('rights-confirm').checked=false; await refreshJobs(); }
+  catch(err){ $('download-status').textContent=err.message; }
+  finally { btn.disabled=false; btn.textContent='Add to server queue ↓'; }
+});
+let activeStreamId = sessionStorage.getItem('playlistBridgeStreamId');
+let streamPollTimer = null;
+async function resumeStreamIfPresent() {
+  if (!activeStreamId) return;
+  try {
+    const s = await api(`/api/streams/${activeStreamId}`);
+    $('download-status').textContent = s.message;
+    if (['ready','running','cancelling'].includes(s.status)) {
+      $('stream-cancel').classList.remove('hidden');
+      $('stream-submit').disabled = true;
+      pollStreamStatus();
+    } else {
+      activeStreamId = null;
+      sessionStorage.removeItem('playlistBridgeStreamId');
+    }
+  } catch (_) {
+    activeStreamId = null;
+    sessionStorage.removeItem('playlistBridgeStreamId');
+  }
+}
+$('stream-submit').addEventListener('click', async()=>{
+  const url = $('media-url').value.trim();
+  if ($('download-mode').value !== 'video') {
+    $('download-status').textContent = 'Direct streaming supports one video only. Choose Single video or use the playlist queue.';
+    return;
+  }
+  if (!url || !$('rights-confirm').checked) {
+    $('download-status').textContent = 'Enter a YouTube video URL and confirm you are allowed to download it.';
+    return;
+  }
+  // Open the new tab synchronously during the click to avoid mobile popup blocking.
+  const popup = window.open('about:blank', '_blank');
+  if (!popup) {
+    $('download-status').textContent = 'Your browser blocked the download tab. Allow pop-ups for this private server and retry.';
+    return;
+  }
+  const btn = $('stream-submit'); btn.disabled = true; btn.textContent = 'Preparing stream…';
+  try {
+    const stream = await api('/api/streams', {method:'POST', body:JSON.stringify({url,quality:$('audio-quality').value,authorized:true})});
+    activeStreamId = stream.id;
+    sessionStorage.setItem('playlistBridgeStreamId', activeStreamId);
+    popup.location.replace(new URL(stream.download_url, window.location.origin).href);
+    $('stream-cancel').classList.remove('hidden');
+    $('download-status').textContent = 'Streaming MP3 to your phone as FFmpeg produces it. You can cancel it here.';
+    pollStreamStatus();
+  } catch(err) {
+    popup.close();
+    $('download-status').textContent = err.message;
+    btn.disabled = false; btn.textContent = 'Stream a single MP3 straight to this phone ↘';
+  }
+});
+async function pollStreamStatus() {
+  if (!activeStreamId) return;
+  try {
+    const s = await api(`/api/streams/${activeStreamId}`);
+    $('download-status').textContent = s.message;
+    if (['complete','cancelled','failed'].includes(s.status)) {
+      activeStreamId = null;
+      sessionStorage.removeItem('playlistBridgeStreamId');
+      $('stream-cancel').classList.add('hidden');
+      $('stream-submit').disabled = false;
+      $('stream-submit').textContent = 'Stream a single MP3 straight to this phone ↘';
+      return;
+    }
+  } catch(err) {
+    $('download-status').textContent = err.message;
+  }
+  streamPollTimer = window.setTimeout(pollStreamStatus, 1000);
+}
+$('stream-cancel').addEventListener('click', async()=>{
+  if (!activeStreamId) return;
+  const btn = $('stream-cancel'); btn.disabled = true; btn.textContent = 'Cancelling…';
+  try {
+    const s = await api(`/api/streams/${activeStreamId}/cancel`, {method:'POST'});
+    $('download-status').textContent = s.message;
+    activeStreamId = null;
+    sessionStorage.removeItem('playlistBridgeStreamId');
+    if (streamPollTimer) window.clearTimeout(streamPollTimer);
+    btn.classList.add('hidden');
+    $('stream-submit').disabled = false;
+    $('stream-submit').textContent = 'Stream a single MP3 straight to this phone ↘';
+  } catch(err) {
+    $('download-status').textContent = err.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Cancel direct stream';
+  }
+});
+refreshJobs();
+resumeStreamIfPresent();
+</script>
+</body>
+</html>
