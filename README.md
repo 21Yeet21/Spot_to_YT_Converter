@@ -89,6 +89,17 @@ This project is for educational purposes only. It automates browser actions to i
 
 This project includes a Flask web interface for managing playlist conversion and media jobs.
 
+### Playlist Bridge Screenshots
+
+#### Spotify to YouTube Music
+
+![Spotify to YouTube Music conversion](images/web/Screenshot_Spot_To_YT.jpg)
+
+#### Media Downloader
+
+![Playlist Bridge Media Downloader](images/web/Screenshot_Media_Downloader.jpg)
+
+
 ### Requirements
 
 - Docker Engine and Docker Compose
